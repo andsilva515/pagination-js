@@ -9,7 +9,14 @@ function populateList() {
 }
 const data = populateList()
 
-let perPage = 3
+const html = {
+    get(element) {
+        return document.querySelector(element)
+    }
+} 
+
+
+let perPage = 5
 const state = {
     page: 1,
     perPage,
@@ -42,6 +49,35 @@ const controls = {
         if (page > state.totalPage) {
             state.page = state.totalPage
         }
+    },
+    
+    createListeners() {
+        html.get('.first').addEventListener('click', () => {
+            controls.goTo(1)
+            update()
+        })
+
+        html.get('.last').addEventListener('click', () => {
+            controls.goTo(state.totalPage)
+            update()
+        })
+
+        html.get('.next').addEventListener('click', () => {
+            controls.next()
+            update()
+        })
+
+        html.get('.prev').addEventListener('click', () => {
+            controls.prev()
+            update()
+        })
+
     }
+}
+
+controls.createListeners()
+
+function update() {
+    console.log(state.page)
 }
 
