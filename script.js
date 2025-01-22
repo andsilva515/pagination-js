@@ -7,14 +7,11 @@ function populateList() {
 
     return data
 }
+
 const data = populateList()
 
-const html = {
-    get(element) {
-        return document.querySelector(element)
-    }
-} 
 
+// ==============================================
 
 let perPage = 5
 const state = {
@@ -22,6 +19,12 @@ const state = {
     perPage,
     totalPage: Math.ceil(data.length / perPage) 
 }
+
+const html = {
+    get(element) {
+        return document.querySelector(element)
+    }
+} 
 
 const controls = {
     next() {
@@ -50,7 +53,7 @@ const controls = {
             state.page = state.totalPage
         }
     },
-    
+
     createListeners() {
         html.get('.first').addEventListener('click', () => {
             controls.goTo(1)
@@ -75,9 +78,15 @@ const controls = {
     }
 }
 
-controls.createListeners()
-
 function update() {
     console.log(state.page)
 }
+
+function init() {
+    controls.createListeners()
+}
+
+
+
+
 
