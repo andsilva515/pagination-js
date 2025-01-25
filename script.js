@@ -37,7 +37,7 @@ const controls = {
             page = 1    
         }
 
-        state.page = page
+        state.page = +page
 
         if (page > state.totalPage) {
             state.page = state.totalPage
@@ -96,6 +96,17 @@ const buttons = {
         const button = document.createElement('div')
 
         button.innerHTML = number;
+
+        if(state.page == number) {
+            button.classList.add('active')
+        }
+
+        button.addEventListener('click', (event) => {
+            const page = event.target.innerText
+
+            controls.goTo(page)
+            update()
+        })
 
         buttons.element.appendChild(button)
     },
